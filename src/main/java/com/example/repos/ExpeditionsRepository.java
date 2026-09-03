@@ -11,9 +11,9 @@ public class ExpeditionsRepository {
 
     public ExpeditionsRepository() {
         this.expeditions = new ArrayList<>();
-        this.expeditions.add(new Expeditions(1, "Paseo del rio", "1A", "Amazonía", "parque", "Pablo Martinez", "2026-09-06", "2026-09-07","Active"));
-        this.expeditions.add(new Expeditions(1, "Paseo del caño", "2A", "Sierra Nevada", "nevado", "Samuel Granda", "2026-09-06", "2026-09-07","Completed"));
-        this.expeditions.add(new Expeditions(1, "Paseo del calocho", "3A", "Costa Pacífica", "playa", "Daniel Vareta", "2026-09-06", "2026-09-07","Cancelled"));
+        this.expeditions.add(new Expeditions(1, "Paseo del rio", "1A12345", "Amazonía", "parque", "Pablo Martinez", "2026-09-06", "2026-09-07","Active"));
+        this.expeditions.add(new Expeditions(2, "Paseo del caño", "2A13456", "Sierra Nevada", "nevado", "Samuel Granda", "2026-09-06", "2026-09-07","Completed"));
+        this.expeditions.add(new Expeditions(3, "Paseo del calocho", "3A14567", "Costa Pacífica", "playa", "Daniel Vareta", "2026-09-06", "2026-09-07","Cancelled"));
     }
 
     public void addExpeditions (Expeditions expedition){
