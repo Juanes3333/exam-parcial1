@@ -42,23 +42,30 @@ public class SightingsServlet extends HttpServlet {
         for (Sightings sightings : deliveryRecords) {
             out.println("<tr>");
             out.println("<td>" + sightings.getId() + "</td>");
-            out.println("<td>" + sightings.getTrackingCode() + "</td>");
-            out.println("<td>" + sightings.getPackageDescription() + "</td>");
-            out.println("<td>" + sightings.getDeliveryDate() + "</td>");
-            out.println("<td>" + sightings.getDestination() + "</td>");
-            out.println("<td>" + sightings.getPriorityLevel() + "</td>");
-            out.println("<td>" + sightings.getVehicleId() + "</td>");
+            out.println("<td>" + sightings.getSightingCode() + "</td>");
+            out.println("<td>" + sightings.getName() + "</td>");
+            out.println("<td>" + sightings.getDescription() + "</td>");
+            out.println("<td>" + sightings.getScientificName() + "</td>");
+            out.println("<td>" + sightings.getSightedAt() + "</td>");
+            out.println("<td>" + sightings.getLocation() + "</td>");
+            out.println("<td>" + sightings.getQuantity() + "</td>");
+            out.println("<td>" + sightings.getConfidenceLevel() + "</td>");
+            out.println("<td>" + sightings.getExpeditionId() + "</td>");
             out.println("</tr>");
         }
         out.println("</table>");
-        out.println("<form method='post' action='deliveries'>");
-        out.println("Tracking Code: <input type='text' name='trackingCode'><br>");
-        out.println("Package Description: <input type='text' name='packageDescription'><br>");
-        out.println("Delivery Date: <input type='text' name='deliveryDate'><br>");
-        out.println("Destination: <input type='text' name='destination'><br>");
-        out.println("Priority Level: <input type='text' name='priorityLevel'><br>");
-        out.println("Vehicle ID: <input type='text' name='vehicleId'><br>");
-        out.println("<input type='submit' value='Register delivery record'>");
+        out.println("<form method='post' action='sightings'>");
+        out.println("id: <input type='text' name='id'><br>");
+        out.println("SightingCode: <input type='text' name='sightingCode'><br>");
+        out.println("Name: <input type='text' name='name'><br>");
+        out.println("Description: <input type='text' name='description'><br>");
+        out.println("ScientificName: <input type='text' name='scientificName'><br>");
+        out.println("SightedAt: <input type='text' name='sightedAt'><br>");
+        out.println("Location: <input type='text' name='location'><br>");
+        out.println("Quantity: <input type='text' name='quantity'><br>");
+        out.println("ConfidenceLevel: <input type='text' name='confidenceLevel'><br>");
+        out.println("ExpeditionId: <input type='text' name='expeditionId'><br>");
+        out.println("<input type='submit' value='Register sighting'>");
         out.println("</form>");
         out.println("</body></html>");
     }
@@ -67,19 +74,22 @@ public class SightingsServlet extends HttpServlet {
     // validación/registro en adventureService.registerDeliveryRecord (las reglas de negocio viven ahí).
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Integer newId = Integer.valueOf(req.getParameter("newId"));
-        String trackingCode = req.getParameter("trackingCode");
-        String packageDescription = req.getParameter("packageDescription");
-        String deliveryDate = req.getParameter("deliveryDate");
-        String destination = req.getParameter("destination");
-        Integer priorityLevel = Integer.valueOf(req.getParameter("priorityLevel"));
-        Integer vehicleId = Integer.valueOf(req.getParameter("vehicleId"));
+        Integer id = Integer.valueOf(req.getParameter("id"));
+        String sightingCode = req.getParameter("sightingCode");
+        String name = req.getParameter("name");
+        String description = req.getParameter("description");
+        String scientificName = req.getParameter("scientificName");
+        String sightedAt = req.getParameter("sightedAt");
+        String location = req.getParameter("location");
+        Integer quantity = Integer.valueOf(req.getParameter("quantity"));
+        Integer confidenceLevel = Integer.valueOf(req.getParameter("confidenceLevel"));
+        Integer expeditionId = Integer.valueOf(req.getParameter("expeditionId"));
 
 
-        Sightings sightings = new Sightings(newId, trackingCode, packageDescription,
-                deliveryDate, destination, priorityLevel, vehicleId);
+        Sightings sightings = new Sightings(id, sightingCode, name,
+                description, scientificName, sightedAt, location, quantity, confidenceLevel, expeditionId);
 
-        boolean registered = adventureService.registerDeliveryRecord(sightings);
+        boolean registered = adventureService.registerSightings(sightings);
 
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter out = resp.getWriter();
